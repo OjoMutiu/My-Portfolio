@@ -1,13 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/constants/app_colors.dart';
+import 'package:portfolio/constants/app_strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/app_dimensions.dart';
 import '../../constants/app_icons.dart';
+import '../../constants/app_images.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/button/custom_action_button.dart';
 
@@ -72,6 +72,21 @@ class DesktopHomePage extends StatelessWidget {
       {"skill": "VS Code", "icon": AppIcons.vsCodeIcon},
     ];
 
+    List<Map<String, dynamic>> experiences = [
+      {
+        "role": "Mobile Application Developer at Credevnet",
+        "description": AppStrings.creDevNetRoleDescription,
+        "duration": "Nov 2023 - Present",
+        "logo": AppImages.creDevNetLogo,
+      },
+      {
+        "role": "Lead Flutter Developer at Namibra",
+        "description": AppStrings.namibraRoleDescription,
+        "duration": "Sep 2023 - Apr 2025",
+        "logo": AppImages.namibraLogo,
+      },
+    ];
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -108,7 +123,7 @@ class DesktopHomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const Spacer(flex: 3,),
+              const Spacer(flex: 3),
               Expanded(
                 flex: 6,
                 child: Row(
@@ -149,7 +164,7 @@ class DesktopHomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const Spacer(flex: 2,),
+              const Spacer(flex: 2),
               screeWidth <= 900
                   ? Container(
                     width: AppDimens.wSize(40),
@@ -459,37 +474,52 @@ class DesktopHomePage extends StatelessWidget {
                 bottom: BorderSide(color: Colors.blueGrey, width: 0.5),
               ),
             ),
-            child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AppTextSora(
-                    text: "My ",
-                    fontWeight: FontWeight.w400,
-                    fontSize: AppDimens.fSize(58),
-                    letterSpacing: 1.2,
-                    color: AppColors.white,
-                  ),
-                  AppTextSora(
-                    text: "Experience ",
-                    fontWeight: FontWeight.w800,
-                    fontSize: AppDimens.fSize(58),
-                    letterSpacing: 1.2,
-                    color: AppColors.white,
-                  ),
-                  const SizedBox(width: 15),
-                  Transform.scale(
-                    scale: 2,
-                    child: Icon(
-                      Icons.work_history,
-                      size: AppDimens.fSize(100),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppTextSora(
+                      text: "My ",
+                      fontWeight: FontWeight.w400,
+                      fontSize: AppDimens.fSize(58),
+                      letterSpacing: 1.2,
                       color: AppColors.white,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: AppDimens.hSize(60)),
-            ]),
+                    AppTextSora(
+                      text: "Experience ",
+                      fontWeight: FontWeight.w800,
+                      fontSize: AppDimens.fSize(58),
+                      letterSpacing: 1.2,
+                      color: AppColors.white,
+                    ),
+                    const SizedBox(width: 15),
+                    Transform.scale(
+                      scale: 2,
+                      child: Icon(
+                        Icons.work_history,
+                        size: AppDimens.fSize(100),
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: AppDimens.hSize(60)),
+                ...List.generate(experiences.length, (index) {
+                  var experience = experiences[index];
+                  return ExperienceCard(
+                    role: experience["role"],
+                    description: experience["description"],
+                    duration: experience["duration"],
+                    logo: experience["logo"],
+                    bgColor:
+                        (index % 2 != 0)
+                            ? AppColors.zinc8002727
+                            : Colors.transparent,
+                  ).marginOnly(bottom: AppDimens.hSize(32));
+                }),
+              ],
+            ),
           ),
 
           //About Me
@@ -503,29 +533,264 @@ class DesktopHomePage extends StatelessWidget {
                 bottom: BorderSide(color: Colors.blueGrey, width: 0.5),
               ),
             ),
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppTextSora(
-                      text: "About ",
-                      fontWeight: FontWeight.w400,
-                      fontSize: AppDimens.fSize(58),
-                      letterSpacing: 1.2,
-                    ),
-                    AppTextSora(
-                      text: "Me",
-                      fontWeight: FontWeight.w800,
-                      fontSize: AppDimens.fSize(58),
-                      letterSpacing: 1.2,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    children: [
+                      SizedBox(height: AppDimens.hSize(120)),
+                      SvgPicture.asset(AppIcons.aboutMeIcon),
+                    ],
+                  ),
                 ),
-                SizedBox(height: AppDimens.hSize(60)),
-                Row(children: [SvgPicture.asset(AppIcons.aboutMeIcon)]),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: AppDimens.hSize(20),
+                        ),
+                        child: Row(
+                          children: [
+                            AppTextSora(
+                              text: "About ",
+                              fontWeight: FontWeight.w400,
+                              fontSize: AppDimens.fSize(58),
+                              letterSpacing: 1.2,
+                            ),
+                            AppTextSora(
+                              text: "Me",
+                              fontWeight: FontWeight.w800,
+                              fontSize: AppDimens.fSize(58),
+                              letterSpacing: 1.2,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        AppStrings.aboutMeText1,
+                        style: TextStyle(
+                          fontFamily: "Sora",
+                          color: AppColors.zinc5007171,
+                          fontSize: AppDimens.fSize(14),
+                          height: 2,
+                        ),
+                      ),
+                      SizedBox(height: AppDimens.hSize(20)),
+                      Text(
+                        AppStrings.aboutMeText2,
+                        style: TextStyle(
+                          fontFamily: "Sora",
+                          color: AppColors.zinc5007171,
+                          fontSize: AppDimens.fSize(14),
+                          height: 2,
+                        ),
+                      ),
+                      SizedBox(height: AppDimens.hSize(20)),
+                      Text(
+                        AppStrings.aboutMeText3,
+                        style: TextStyle(
+                          fontFamily: "Sora",
+                          color: AppColors.zinc5007171,
+                          fontSize: AppDimens.fSize(14),
+                          height: 2,
+                        ),
+                      ),
+                      SizedBox(height: AppDimens.hSize(20)),
+                      Text(
+                        AppStrings.aboutMeText4,
+                        style: TextStyle(
+                          fontFamily: "Sora",
+                          color: AppColors.zinc5007171,
+                          fontSize: AppDimens.fSize(14),
+                          height: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
+          ),
+
+          //Portfolio
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.wSize(80),
+              vertical: AppDimens.hSize(60),
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.blackColor,
+              border: Border(
+                bottom: BorderSide(color: Colors.blueGrey, width: 0.5),
+              ),
+            ),
+            child: Column(children: [
+
+            ],),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ReadMoreTextWidget extends StatefulWidget {
+  final String text;
+  final int maxLines;
+  final TextStyle? textStyle;
+  final TextStyle? toggleStyle;
+  final FontWeight? fontWeight;
+  final double? fontSize, letterSpacing;
+  final Color? textColor;
+  final TextOverflow? textOverflow;
+
+  const ReadMoreTextWidget({
+    super.key,
+    required this.text,
+    this.maxLines = 4,
+    this.textStyle,
+    this.toggleStyle,
+    this.fontWeight,
+    this.fontSize,
+    this.letterSpacing,
+    this.textColor,
+    this.textOverflow,
+  });
+
+  @override
+  State<ReadMoreTextWidget> createState() => _ReadMoreTextWidgetState();
+}
+
+class _ReadMoreTextWidgetState extends State<ReadMoreTextWidget> {
+  bool _readMore = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final textPainter = TextPainter(
+          text: TextSpan(
+            text: widget.text,
+            style: TextStyle(
+              fontFamily: "Sora",
+              fontWeight: widget.fontWeight ?? FontWeight.w400,
+              fontSize: AppDimens.fSize(widget.fontSize ?? 14),
+              color: widget.textColor ?? AppColors.blackColor,
+              letterSpacing: widget.letterSpacing,
+            ),
+          ),
+          maxLines: widget.maxLines,
+          textDirection: TextDirection.ltr,
+        )..layout(maxWidth: constraints.maxWidth);
+
+        final isOverflowing = textPainter.didExceedMaxLines;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.text,
+              style: TextStyle(
+                fontFamily: "Sora",
+                fontWeight: widget.fontWeight ?? FontWeight.w400,
+                fontSize: AppDimens.fSize(widget.fontSize ?? 14),
+                color: widget.textColor ?? AppColors.blackColor,
+                letterSpacing: widget.letterSpacing,
+              ),
+              maxLines: _readMore ? null : widget.maxLines,
+              overflow:
+                  _readMore ? TextOverflow.visible : TextOverflow.ellipsis,
+            ),
+            if (isOverflowing)
+              GestureDetector(
+                onTap: () => setState(() => _readMore = !_readMore),
+                child: Text(
+                  _readMore ? 'Read less' : 'Read more',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class ExperienceCard extends StatelessWidget {
+  final String role, description, duration, logo;
+  final Color? bgColor;
+
+  const ExperienceCard({
+    super.key,
+    required this.role,
+    required this.description,
+    required this.duration,
+    required this.logo,
+    this.bgColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimens.wSize(24),
+        vertical: AppDimens.hSize(40),
+      ),
+      decoration: BoxDecoration(
+        color: bgColor ?? Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.zinc5007171, width: 1),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    height: AppDimens.hSize(56),
+                    width: AppDimens.wSize(42),
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                        image: AssetImage(logo),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: AppDimens.wSize(24)),
+                  AppTextSora(
+                    text: role,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: AppDimens.fSize(24),
+                  ),
+                ],
+              ),
+              AppTextSora(
+                text: duration,
+                color: AppColors.white.withValues(alpha: 0.9),
+                fontWeight: FontWeight.w600,
+                fontSize: AppDimens.fSize(14),
+              ),
+            ],
+          ),
+          SizedBox(height: AppDimens.hSize(28)),
+          ReadMoreTextWidget(
+            text: description,
+            textColor: AppColors.zinc300D4D,
+            fontSize: AppDimens.fSize(14),
+            maxLines: 3,
           ),
         ],
       ),
