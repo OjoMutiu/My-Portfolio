@@ -3,12 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/constants/app_colors.dart';
 import 'package:portfolio/constants/app_strings.dart';
+import 'package:portfolio/screens/home/widgets/experience_card.dart';
+import 'package:portfolio/screens/home/widgets/testimonial_page_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/app_dimensions.dart';
 import '../../constants/app_icons.dart';
 import '../../constants/app_images.dart';
-import '../../widgets/app_text.dart';
+import '../../widgets/text/app_text.dart';
 import '../../widgets/button/custom_action_button.dart';
 
 class DesktopHomePage extends StatelessWidget {
@@ -16,6 +18,9 @@ class DesktopHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final PageController pageController = PageController(viewportFraction: 1/3, );
+
     double screeWidth = MediaQuery.of(context).size.width;
 
     Future<void> launchUrlAddress(String url) async {
@@ -84,6 +89,39 @@ class DesktopHomePage extends StatelessWidget {
         "description": AppStrings.namibraRoleDescription,
         "duration": "Sep 2023 - Apr 2025",
         "logo": AppImages.namibraLogo,
+      },
+    ];
+
+    List<Map<String, dynamic>> projects = [
+      {
+        "title": "Reservation and Restaurant Application",
+        "image": AppImages.foodRestaurantImg,
+        "description": "",
+      },
+      {
+        "title": "Real Estate Mobile Application",
+        "image": AppImages.shelterImg2,
+        "description": "",
+      },
+      {
+        "title": "Reservation and Restaurant Application",
+        "image": AppImages.homifiedImg,
+        "description": "",
+      },
+      {
+        "title": "Reservation and Restaurant Application",
+        "image": AppImages.cosmeticsGigImg,
+        "description": "",
+      },
+      {
+        "title": "Reservation and Restaurant Application",
+        "image": AppImages.shelterImg1,
+        "description": "",
+      },
+      {
+        "title": "Reservation and Restaurant Application",
+        "image": AppImages.scheduleImg,
+        "description": "",
       },
     ];
 
@@ -462,7 +500,7 @@ class DesktopHomePage extends StatelessWidget {
             ).paddingOnly(bottom: AppDimens.hSize(20)),
           ),
 
-          //Experience
+          ///Experience
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: AppDimens.wSize(80),
@@ -522,7 +560,7 @@ class DesktopHomePage extends StatelessWidget {
             ),
           ),
 
-          //About Me
+          ///About Me
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: AppDimens.wSize(80),
@@ -615,7 +653,7 @@ class DesktopHomePage extends StatelessWidget {
             ),
           ),
 
-          //Portfolio
+          ///Portfolio
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: AppDimens.wSize(80),
@@ -627,9 +665,104 @@ class DesktopHomePage extends StatelessWidget {
                 bottom: BorderSide(color: Colors.blueGrey, width: 0.5),
               ),
             ),
-            child: Column(children: [
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppDimens.hSize(20)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppTextSora(
+                        text: "My ",
+                        fontWeight: FontWeight.w400,
+                        fontSize: AppDimens.fSize(58),
+                        letterSpacing: 1.2,
+                        color: AppColors.white,
+                      ),
+                      AppTextSora(
+                        text: "Projects ",
+                        fontWeight: FontWeight.w800,
+                        fontSize: AppDimens.fSize(58),
+                        letterSpacing: 1.2,
+                        color: AppColors.white,
+                      ),
+                      const SizedBox(width: 15),
+                      Transform.scale(
+                        scale: 2,
+                        child: Icon(
+                          Icons.folder_copy,
+                          size: AppDimens.fSize(100),
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: AppDimens.hSize(20)),
+                ...List.generate(projects.length, (index) {
+                  var project = projects[index];
+                  return ProjectCard(
+                    title: project["title"],
+                    description:
+                        "I'm Evren Shah Lorem Ipsum is "
+                        "simply dummy text of the printing and typesetting "
+                        "industry. Lorem Ipsum has been the industry's "
+                        "standard dummy text ever since the 1500s, when an "
+                        "unknown printer took a galley of type and scrambled "
+                        "it to specimen book.",
+                    image: project["image"],
+                    index: index,
+                  );
+                }),
+              ],
+            ),
+          ),
 
-            ],),
+          ///Testimonials
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.wSize(80),
+              vertical: AppDimens.hSize(60),
+            ),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.blueGrey, width: 0.5),
+              ),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppDimens.hSize(20)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppTextSora(
+                        text: "My ",
+                        fontWeight: FontWeight.w400,
+                        fontSize: AppDimens.fSize(58),
+                        letterSpacing: 1.2,
+                      ),
+                      AppTextSora(
+                        text: "Testimonial ",
+                        fontWeight: FontWeight.w800,
+                        fontSize: AppDimens.fSize(58),
+                        letterSpacing: 1.2,
+                      ),
+                      const SizedBox(width: 15),
+                      Transform.scale(
+                        scale: 2,
+                        child: Icon(
+                          Icons.rate_review,
+                          size: AppDimens.fSize(100),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: AppDimens.hSize(20)),
+                AnimatedPageView(),
+              ],
+            ),
           ),
         ],
       ),
@@ -637,161 +770,92 @@ class DesktopHomePage extends StatelessWidget {
   }
 }
 
-class ReadMoreTextWidget extends StatefulWidget {
-  final String text;
-  final int maxLines;
-  final TextStyle? textStyle;
-  final TextStyle? toggleStyle;
-  final FontWeight? fontWeight;
-  final double? fontSize, letterSpacing;
-  final Color? textColor;
-  final TextOverflow? textOverflow;
+class ProjectCard extends StatelessWidget {
+  final String title, description, image;
+  final int index;
 
-  const ReadMoreTextWidget({
+  const ProjectCard({
     super.key,
-    required this.text,
-    this.maxLines = 4,
-    this.textStyle,
-    this.toggleStyle,
-    this.fontWeight,
-    this.fontSize,
-    this.letterSpacing,
-    this.textColor,
-    this.textOverflow,
-  });
-
-  @override
-  State<ReadMoreTextWidget> createState() => _ReadMoreTextWidgetState();
-}
-
-class _ReadMoreTextWidgetState extends State<ReadMoreTextWidget> {
-  bool _readMore = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final textPainter = TextPainter(
-          text: TextSpan(
-            text: widget.text,
-            style: TextStyle(
-              fontFamily: "Sora",
-              fontWeight: widget.fontWeight ?? FontWeight.w400,
-              fontSize: AppDimens.fSize(widget.fontSize ?? 14),
-              color: widget.textColor ?? AppColors.blackColor,
-              letterSpacing: widget.letterSpacing,
-            ),
-          ),
-          maxLines: widget.maxLines,
-          textDirection: TextDirection.ltr,
-        )..layout(maxWidth: constraints.maxWidth);
-
-        final isOverflowing = textPainter.didExceedMaxLines;
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.text,
-              style: TextStyle(
-                fontFamily: "Sora",
-                fontWeight: widget.fontWeight ?? FontWeight.w400,
-                fontSize: AppDimens.fSize(widget.fontSize ?? 14),
-                color: widget.textColor ?? AppColors.blackColor,
-                letterSpacing: widget.letterSpacing,
-              ),
-              maxLines: _readMore ? null : widget.maxLines,
-              overflow:
-                  _readMore ? TextOverflow.visible : TextOverflow.ellipsis,
-            ),
-            if (isOverflowing)
-              GestureDetector(
-                onTap: () => setState(() => _readMore = !_readMore),
-                child: Text(
-                  _readMore ? 'Read less' : 'Read more',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class ExperienceCard extends StatelessWidget {
-  final String role, description, duration, logo;
-  final Color? bgColor;
-
-  const ExperienceCard({
-    super.key,
-    required this.role,
+    required this.title,
     required this.description,
-    required this.duration,
-    required this.logo,
-    this.bgColor,
+    required this.image,
+    required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.wSize(24),
-        vertical: AppDimens.hSize(40),
+        vertical: AppDimens.hSize(60),
+        horizontal: AppDimens.wSize(32),
       ),
       decoration: BoxDecoration(
-        color: bgColor ?? Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.zinc5007171, width: 1),
+        border: Border(bottom: BorderSide(color: AppColors.zinc8002727)),
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    height: AppDimens.hSize(56),
-                    width: AppDimens.wSize(42),
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: AssetImage(logo),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: AppDimens.wSize(24)),
-                  AppTextSora(
-                    text: role,
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: AppDimens.fSize(24),
-                  ),
-                ],
+          if (index % 2 == 0) ...[
+            Container(
+              height: AppDimens.hSize(430),
+              //width: AppDimens.wSize(530),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
               ),
-              AppTextSora(
-                text: duration,
-                color: AppColors.white.withValues(alpha: 0.9),
-                fontWeight: FontWeight.w600,
-                fontSize: AppDimens.fSize(14),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.asset(image, fit: BoxFit.cover),
               ),
-            ],
+            ),
+          ],
+          SizedBox(
+            width: AppDimens.wSize(590),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppTextSora(
+                  text: "0${index + 1}",
+                  fontWeight: FontWeight.w800,
+                  fontSize: AppDimens.fSize(58),
+                  letterSpacing: 1.2,
+                  color: AppColors.white,
+                ),
+                SizedBox(height: AppDimens.hSize(20)),
+                AppTextSora(
+                  text: title,
+                  fontWeight: FontWeight.w700,
+                  fontSize: AppDimens.fSize(50),
+                  letterSpacing: 1.2,
+                  color: AppColors.white,
+                ),
+                SizedBox(height: AppDimens.hSize(28)),
+                AppTextSora(
+                  text: description,
+                  maxLines: 3,
+                  color: AppColors.zinc5007171,
+                ),
+                SizedBox(height: AppDimens.hSize(28)),
+                SvgPicture.asset(AppIcons.readMoreIcon),
+              ],
+            ),
           ),
-          SizedBox(height: AppDimens.hSize(28)),
-          ReadMoreTextWidget(
-            text: description,
-            textColor: AppColors.zinc300D4D,
-            fontSize: AppDimens.fSize(14),
-            maxLines: 3,
-          ),
+          if (index % 2 != 0) ...[
+            Container(
+              height: AppDimens.hSize(430),
+              //width: AppDimens.wSize(530),
+              margin: EdgeInsets.only(left: AppDimens.wSize(20)),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(18),
+                  child: Image.asset(image, fit: BoxFit.cover),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );

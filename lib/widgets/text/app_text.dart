@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/constants/app_dimensions.dart';
 
-import '../constants/app_colors.dart';
+import '../../constants/app_colors.dart';
 
 class AppTextSora extends StatelessWidget {
   final String text;
   final FontWeight? fontWeight;
   final double? fontSize, letterSpacing;
   final int? maxLines;
+  final TextAlign? textAlign;
   final Color? color;
   final TextOverflow? textOverflow;
 
@@ -17,7 +18,7 @@ class AppTextSora extends StatelessWidget {
     this.fontWeight,
     this.fontSize,
     this.letterSpacing,
-    this.color, this.maxLines, this.textOverflow,
+    this.color, this.maxLines, this.textOverflow, this.textAlign,
   });
 
   @override
@@ -26,6 +27,7 @@ class AppTextSora extends StatelessWidget {
       text,
       maxLines: maxLines,
       overflow: textOverflow,
+      textAlign: textAlign,
       style: TextStyle(
         fontFamily: "Sora",
         fontWeight: fontWeight ?? FontWeight.w400,

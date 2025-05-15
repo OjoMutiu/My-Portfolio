@@ -20,4 +20,6 @@ class AppIcons{
   static const String vsCodeIcon = "assets/icons/vs_code_icon.svg";
 
   static const String aboutMeIcon = "assets/icons/about_me_icon.svg";
+
+  static const String readMoreIcon = "assets/icons/read_more_icon.svg";
 }
