@@ -73,8 +73,8 @@ class AnimatedPageViewState extends State<AnimatedPageView> {
 
 
                 }
-                var value1 = (1 - (value * 0.3)).clamp(0.0, 1.0);
                 final yOffset = 50 * (1 - value);
+                bool switchTheme = (_pageController.page ?? 0).abs() <= index;//index%2 != 0;
                 return Center(
                   child: Transform.scale(
                     scale: Curves.easeOut.transform(value),
@@ -85,7 +85,7 @@ class AnimatedPageViewState extends State<AnimatedPageView> {
                         horizontal: AppDimens.wSize(35),
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.blackColor,
+                        color: switchTheme ? AppColors.blackColor.withValues(alpha: value) : AppColors.white,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -127,33 +127,42 @@ class AnimatedPageViewState extends State<AnimatedPageView> {
                                       "the right owner.",
                                   textAlign: TextAlign.center,
                                   fontSize: AppDimens.fSize(13),
-                                  color: AppColors.white,
+                                  color: switchTheme ? AppColors.white : AppColors.blackColor,
                                 ),
                               ),
                             ),
                             SizedBox(height: AppDimens.hSize(24)),
-                            SizedBox(
-                              width: AppDimens.wSize(150),
-                              child: Divider(
-                                thickness: 2,
-                                color: AppColors.white,
+                            Transform.translate(
+                              offset: Offset(0, yOffset),
+                              child: SizedBox(
+                                width: AppDimens.wSize(150),
+                                child: Divider(
+                                  thickness: 2,
+                                  color: switchTheme ? AppColors.white : AppColors.blackColor,
+                                ),
                               ),
                             ),
                             SizedBox(height: AppDimens.hSize(24)),
-                            AppTextSora(
-                              text:
-                              "Flora Shreen",
-                              fontSize: AppDimens.fSize(16),
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w600,
+                            Transform.translate(
+                              offset: Offset(0, yOffset),
+                              child: AppTextSora(
+                                text:
+                                "Flora Shreen",
+                                fontSize: AppDimens.fSize(16),
+                                color: switchTheme ? AppColors.white : AppColors.blackColor,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             SizedBox(height: AppDimens.hSize(24)),
-                            AppTextSora(
-                              text:
-                              "Designer",
-                              fontSize: AppDimens.fSize(16),
-                              color: AppColors.zinc5007171,
-                              fontWeight: FontWeight.w600,
+                            Transform.translate(
+                              offset: Offset(0, yOffset),
+                              child: AppTextSora(
+                                text:
+                                "Designer",
+                                fontSize: AppDimens.fSize(16),
+                                color: AppColors.zinc5007171,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         ),
