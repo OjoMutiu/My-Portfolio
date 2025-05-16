@@ -46,7 +46,7 @@ class AppDimens {
         : mobileBaseWidth;
 
     double scaled = px * (screenWidth / baseWidth);
-    return scaled.clamp(12.0, 28.0);
+    return scaled.clamp(12.0, 30.0);
   }
 
 }

@@ -5,11 +5,13 @@ import 'package:portfolio/constants/app_colors.dart';
 import 'package:portfolio/constants/app_strings.dart';
 import 'package:portfolio/screens/home/widgets/experience_card.dart';
 import 'package:portfolio/screens/home/widgets/testimonial_page_view.dart';
+import 'package:portfolio/widgets/text_field/custom_txt_field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/app_dimensions.dart';
 import '../../constants/app_icons.dart';
 import '../../constants/app_images.dart';
+import '../../controllers/user_controller.dart';
 import '../../widgets/text/app_text.dart';
 import '../../widgets/button/custom_action_button.dart';
 
@@ -18,8 +20,6 @@ class DesktopHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final PageController pageController = PageController(viewportFraction: 1/3, );
 
     double screeWidth = MediaQuery.of(context).size.width;
 
@@ -724,11 +724,6 @@ class DesktopHomePage extends StatelessWidget {
               horizontal: AppDimens.wSize(80),
               vertical: AppDimens.hSize(60),
             ),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.blueGrey, width: 0.5),
-              ),
-            ),
             child: Column(
               children: [
                 Padding(
@@ -764,6 +759,250 @@ class DesktopHomePage extends StatelessWidget {
               ],
             ),
           ),
+
+          ///Contact Me
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.wSize(112),
+              vertical: AppDimens.hSize(80),
+            ),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.blueGrey, width: 0.5),
+              ),
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: AppDimens.hSize(60)),
+                Row(
+                  children: [
+                    GetBuilder(
+                      builder: (UserController userController) {
+                        return Expanded(
+                          flex: 3,
+                          child: Column(
+                            children: [
+                              CustomTxtField(
+                                controller: userController.userNameController,
+                                hintText: "Your name",
+                              ),
+                              SizedBox(height: AppDimens.hSize(20)),
+                              CustomTxtField(
+                                controller: userController.userEmailController,
+                                hintText: "Email",
+                              ),
+                              SizedBox(height: AppDimens.hSize(20)),
+                              CustomTxtField(
+                                controller: userController.userWebAddressController,
+                                hintText: "Your website (if any)",
+                              ),
+                              SizedBox(height: AppDimens.hSize(20)),
+                              CustomTxtField(
+                                controller: userController.userHowCanIController,
+                                hintText: "Let's discuss how we can create magic",
+                                maxLines: 5,
+                              ),
+                              SizedBox(height: AppDimens.hSize(30)),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CustomActionButton(
+                                    btnText: 'Get In Touch',
+                                    width: AppDimens.wSize(150),
+                                    height: AppDimens.hSize(60),
+                                    onPressed: () {},
+                                  ),
+                                  const Spacer(),
+                                  ...List.generate(socials.length, (index) {
+                                    return GestureDetector(
+                                      onTap: socials[index]["onTap"],
+                                      child: Container(
+                                        height: AppDimens.hSize(66),
+                                        width: AppDimens.wSize(56),
+                                        margin: EdgeInsets.only(
+                                          right: AppDimens.wSize(15),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: AppDimens.hSize(12),
+                                          horizontal: AppDimens.wSize(6),
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                          borderRadius: BorderRadius.circular(4),
+                                          border: Border.all(
+                                            color: AppColors.blackColor,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        child: SvgPicture.asset(
+                                          socials[index]["icon"],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+
+                    const Spacer(),
+
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              AppTextSora(
+                                text: "Let's ",
+                                fontWeight: FontWeight.w800,
+                                fontSize: AppDimens.fSize(64),
+                                letterSpacing: 1.2,
+                              ),
+                              Stack(
+                                children: [
+                                  // Outline
+                                  Text(
+                                    "talk",
+                                    style: TextStyle(
+                                      fontFamily: "Sora",
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: AppDimens.fSize(64),
+                                      foreground:
+                                      Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 3
+                                        ..color = AppColors.blackColor,
+                                      letterSpacing: 2,
+                                    ),
+                                  ),
+                                  // Fill
+                                  Text(
+                                    "talk",
+                                    style: TextStyle(
+                                      fontFamily: "Sora",
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: AppDimens.fSize(64),
+                                      color: Colors.white,
+                                      letterSpacing: 2,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              AppTextSora(
+                                text: " for",
+                                fontWeight: FontWeight.w800,
+                                fontSize: AppDimens.fSize(64),
+                                letterSpacing: 1.2,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: AppDimens.hSize(12)),
+                          AppTextSora(
+                            text: "Something special",
+                            fontWeight: FontWeight.w800,
+                            fontSize: AppDimens.fSize(64),
+                            letterSpacing: 1.2,
+                          ),
+                          SizedBox(height: AppDimens.hSize(20)),
+                          AppTextSora(
+                            text: "I seek to push the limits of creativity to create"
+                                " high-engaging, user-friendly, and memorable "
+                                "interactive mobile experiences.",
+                            fontWeight: FontWeight.w400,
+                            fontSize: AppDimens.fSize(14),
+                            color: AppColors.zinc5007171,
+                            letterSpacing: 1.2,
+                          ),
+                          SizedBox(height: AppDimens.hSize(40)),
+                          Row(
+                            children: [
+                              Transform.scale(
+                                scale: 1.5,
+                                child: Icon(
+                                  Icons.email,
+                                  size: AppDimens.fSize(20),
+                                ),
+                              ),
+                              AppTextSora(
+                                text: "  sourcecode.wildtech@gmail.com",
+                                fontWeight: FontWeight.w600,
+                                fontSize: AppDimens.fSize(28),
+                              ),
+                            ],
+                          ),
+                          AppTextSora(
+                            text: "",
+                            fontWeight: FontWeight.w600,
+                            fontSize: AppDimens.fSize(28),
+                            letterSpacing: 1.2,
+                          ),
+                          SizedBox(height: AppDimens.hSize(40)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          ///Footer
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.wSize(80),
+              vertical: AppDimens.hSize(24),
+            ),
+            color: AppColors.blackColor,
+            child: Row(children: [
+              SvgPicture.asset(AppIcons.logo, colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn,),),
+              SizedBox(width: AppDimens.wSize(12)),
+              Row(
+                children: [
+                  AppTextSora(
+                    text: "</",
+                    fontWeight: FontWeight.w800,
+                    fontSize: AppDimens.fSize(18),
+                    color: AppColors.white,
+                  ),
+                  AppTextSora(text: "Source", fontWeight: FontWeight.w700, color: AppColors.white,),
+
+                  AppTextSora(text: "Code", fontWeight: FontWeight.w700, color: AppColors.white,),
+                  AppTextSora(
+                    text: "/>",
+                    fontWeight: FontWeight.w800,
+                    fontSize: AppDimens.fSize(18),
+                    color: AppColors.white,
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                AppTextSora(
+                  text: "@ 2025",
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+                SizedBox(height: AppDimens.hSize(8)),
+                Row(
+                  children: [
+                    SvgPicture.asset(AppIcons.flutterIcon, height: AppDimens.fSize(24),),
+                    AppTextSora(
+                      text: " Made with Flutter",
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.white,
+                    ),
+                  ],
+                ),
+              ],)
+            ],),
+          )
         ],
       ),
     );
