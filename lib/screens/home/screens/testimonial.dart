@@ -5,6 +5,56 @@ import '../../../constants/app_dimensions.dart';
 import '../../../constants/app_images.dart';
 import '../../../widgets/text/app_text.dart';
 
+class Testimonial extends StatelessWidget {
+  const Testimonial({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimens.wSize(AppDimens.isDesktop ? 80 : 16),
+        vertical: AppDimens.hSize(AppDimens.isDesktop ? 60: 24),
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: AppDimens.hSize(20),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppTextSora(
+                  text: "My ",
+                  fontWeight: FontWeight.w400,
+                  fontSize: AppDimens.fSize(AppDimens.isDesktop ? 58 :28),
+                  letterSpacing: 1.2,
+                ),
+                AppTextSora(
+                  text: "Testimonial ",
+                  fontWeight: FontWeight.w800,
+                  fontSize: AppDimens.fSize(AppDimens.isDesktop ? 58 :28),
+                  letterSpacing: 1.2,
+                ),
+                const SizedBox(width: 15),
+                Transform.scale(
+                  scale: 2,
+                  child: Icon(
+                    Icons.rate_review,
+                    size: AppDimens.fSize(AppDimens.isDesktop ? 100 :25),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: AppDimens.hSize(20)),
+          AnimatedPageView(),
+        ],
+      ),
+    );
+  }
+}
+
 
 class AnimatedPageView extends StatefulWidget {
   const AnimatedPageView({super.key});
@@ -20,7 +70,7 @@ class AnimatedPageViewState extends State<AnimatedPageView> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 1/3, initialPage: 1);
+    _pageController = PageController(viewportFraction: AppDimens.isDesktop ? 1/3 : 0.8, initialPage: 1);
 
     // Trigger a rebuild after the first frame to get the page value
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -53,13 +103,14 @@ class AnimatedPageViewState extends State<AnimatedPageView> {
       child: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-          vertical: AppDimens.hSize(40),
-          horizontal: AppDimens.wSize(24),
+          vertical: AppDimens.hSize(AppDimens.isDesktop ? 40 : 20),
+          horizontal: AppDimens.isDesktop ? AppDimens.wSize(24) : 0,
         ),
-        height: 478,
-        width: totalWidth > MediaQuery.of(context).size.width
+        height: AppDimens.hSize(AppDimens.isDesktop ? 532 : 470),
+        width:
+        AppDimens.isDesktop ?totalWidth > MediaQuery.of(context).size.width
             ? MediaQuery.of(context).size.width
-            : totalWidth,
+            : totalWidth : AppDimens.screenWidth,
         child: PageView.builder(
           controller: _pageController,
           itemCount: testimonials.length,
@@ -86,7 +137,7 @@ class AnimatedPageViewState extends State<AnimatedPageView> {
                       ),
                       decoration: BoxDecoration(
                         color:  AppColors.blackColor.withValues(alpha: value),
-                            //: AppColors.white,
+                        //: AppColors.white,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(

@@ -20,61 +20,122 @@ class ExperienceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.wSize(24),
-        vertical: AppDimens.hSize(40),
-      ),
-      decoration: BoxDecoration(
-        color: bgColor ?? Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.zinc5007171, width: 1),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return AppDimens.isDesktop
+        ? Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimens.wSize(24),
+            vertical: AppDimens.hSize(40),
+          ),
+          decoration: BoxDecoration(
+            color: bgColor ?? Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.zinc5007171, width: 1),
+          ),
+          child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: AppDimens.hSize(56),
-                    width: AppDimens.wSize(42),
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: AssetImage(logo),
-                        fit: BoxFit.cover,
+                  Row(
+                    children: [
+                      Container(
+                        height: AppDimens.hSize(56),
+                        width: AppDimens.wSize(42),
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            image: AssetImage(logo),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ),
+                      SizedBox(width: AppDimens.wSize(24)),
+                      AppTextSora(
+                        text: role,
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: AppDimens.fSize(24),
+                      ),
+                    ],
                   ),
-                  SizedBox(width: AppDimens.wSize(24)),
                   AppTextSora(
-                    text: role,
-                    color: AppColors.white,
+                    text: duration,
+                    color: AppColors.white.withValues(alpha: 0.9),
                     fontWeight: FontWeight.w600,
-                    fontSize: AppDimens.fSize(24),
+                    fontSize: AppDimens.fSize(14),
                   ),
                 ],
               ),
-              AppTextSora(
-                text: duration,
-                color: AppColors.white.withValues(alpha: 0.9),
-                fontWeight: FontWeight.w600,
+              SizedBox(height: AppDimens.hSize(28)),
+              ReadMoreTextWidget(
+                text: description,
+                textColor: AppColors.zinc300D4D,
                 fontSize: AppDimens.fSize(14),
+                maxLines: 3,
               ),
             ],
           ),
-          SizedBox(height: AppDimens.hSize(28)),
-          ReadMoreTextWidget(
-            text: description,
-            textColor: AppColors.zinc300D4D,
-            fontSize: AppDimens.fSize(14),
-            maxLines: 3,
+        )
+    ///Mobile
+        : Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimens.wSize(24),
+            vertical: AppDimens.hSize(30),
           ),
-        ],
-      ),
-    );
+          decoration: BoxDecoration(
+            color: bgColor ?? Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.zinc5007171, width: 1),
+          ),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: AppDimens.hSize(56),
+                        width: AppDimens.wSize(42),
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            image: AssetImage(logo),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: AppDimens.wSize(24)),
+                      Expanded(
+                        child: AppTextSora(
+                          text: role,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: AppDimens.fSize(20),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: AppDimens.hSize(30)),
+                  AppTextSora(
+                    text: duration,
+                    color: AppColors.white.withValues(alpha: 0.9),
+                    fontWeight: FontWeight.w600,
+                    fontSize: AppDimens.fSize(16),
+                  ),
+                ],
+              ),
+              SizedBox(height: AppDimens.hSize(28)),
+              ReadMoreTextWidget(
+                text: description,
+                textColor: AppColors.zinc300D4D,
+                fontSize: AppDimens.fSize(16),
+                maxLines: 3,
+              ),
+            ],
+          ),
+        );
   }
 }

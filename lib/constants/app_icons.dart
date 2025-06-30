@@ -2,7 +2,7 @@ class AppIcons{
   static const String logo = "assets/icons/logo_icon.svg";
   static const String downloadIcon = "assets/icons/download_icon.svg";
 
-  static const String bannerIcon = "assets/icons/banner_icon.svg";
+  static const String bannerIcon = "assets/icons/banner.svg";//"assets/icons/banner_icon.svg";
   static const String linkedInIcon = "assets/icons/linkedin_icon.svg";
   static const String gitHubIcon = "assets/icons/github_icon.svg";
   static const String upworkIcon = "assets/icons/upwork_icon.svg";

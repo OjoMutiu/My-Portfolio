@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
 
 class AppDimens {
-  static final double screenHeight = Get.context!.height;
-  static final double screenWidth = Get.context!.width;
+  static double get screenHeight => Get.context!.height;
+  static double get screenWidth => Get.context!.width;
 
   static bool get isMobile => screenWidth < 600;
+  static bool get isDesktop => screenWidth >= 800;
   static bool get isTablet => screenWidth >= 600 && screenWidth <= 1024;
-  static bool get isDesktop => screenWidth > 1024;
+  //static bool get isDesktop => screenWidth > 1024;
 
   // Reference design dimensions (typically iPhone 11 for mobile)
   static const double mobileBaseWidth = 375.0;
@@ -21,8 +22,8 @@ class AppDimens {
   static double wSize(double px) {
     double baseWidth = isDesktop
         ? desktopBaseWidth
-        : isTablet
-        ? tabletBaseWidth
+        // : isTablet
+        // ? tabletBaseWidth
         : mobileBaseWidth;
 
     return px * (screenWidth / baseWidth);
@@ -31,22 +32,43 @@ class AppDimens {
   static double hSize(double px) {
     double baseHeight = isDesktop
         ? desktopBaseHeight
-        : isTablet
-        ? tabletBaseHeight
+        // : isTablet
+        // ? tabletBaseHeight
         : mobileBaseHeight;
 
     return px * (screenHeight / baseHeight);
   }
 
   static double fSize(double px) {
-    double baseWidth = isDesktop
-        ? desktopBaseWidth
-        : isTablet
-        ? tabletBaseWidth
-        : mobileBaseWidth;
+    // double baseWidth = isDesktop
+    //     ? desktopBaseWidth
+    //     // : isTablet
+    //     // ? tabletBaseWidth
+    //     : mobileBaseWidth;
 
-    double scaled = px * (screenWidth / baseWidth);
-    return scaled.clamp(12.0, 30.0);
+
+
+    if(isDesktop){
+      double baseWidth =  desktopBaseWidth;
+      double scaled = px * (screenWidth / baseWidth);
+      if(screenWidth >= 800) {
+        return scaled.clamp(12.0, 30.0);
+      }else{
+        return px * (screenHeight / 1024);
+      }
+    }else if (screenHeight < 670) {
+      return px * ((screenHeight) / 660);
+    } else if (screenHeight < 785) {
+      return px * ((screenHeight) / 760);
+    } else if (screenHeight < 820) {
+      return px * ((screenHeight) / 812);
+    } else if (screenHeight < 870) {
+      return px * ((screenHeight) / 860);
+    } else if (screenHeight < 940) {
+      return px * ((screenHeight) / 930);
+    }else{
+      return px;
+    }
   }
 
 }

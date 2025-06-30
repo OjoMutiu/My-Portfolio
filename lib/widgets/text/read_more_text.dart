@@ -40,7 +40,7 @@ class _ReadMoreTextWidgetState extends State<ReadMoreTextWidget> {
         final textPainter = TextPainter(
           text: TextSpan(
             text: widget.text,
-            style: TextStyle(
+            style: widget.textStyle ?? TextStyle(
               fontFamily: "Sora",
               fontWeight: widget.fontWeight ?? FontWeight.w400,
               fontSize: AppDimens.fSize(widget.fontSize ?? 14),
@@ -59,7 +59,7 @@ class _ReadMoreTextWidgetState extends State<ReadMoreTextWidget> {
           children: [
             Text(
               widget.text,
-              style: TextStyle(
+              style: widget.textStyle ?? TextStyle(
                 fontFamily: "Sora",
                 fontWeight: widget.fontWeight ?? FontWeight.w400,
                 fontSize: AppDimens.fSize(widget.fontSize ?? 14),
