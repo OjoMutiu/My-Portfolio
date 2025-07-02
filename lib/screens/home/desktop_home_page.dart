@@ -191,6 +191,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
               child: ListView.builder(
                 itemCount: sections.length,
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (_, index) {
                   return FadeSlideInOnVisible(
                     key: sectionKeys[index],

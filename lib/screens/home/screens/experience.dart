@@ -85,7 +85,7 @@ class Experience extends StatelessWidget {
                             : Colors.transparent,
                   ),
                 );
-              }),
+              }, growable: true,),
             ],
           ),
         )
@@ -148,7 +148,7 @@ class Experience extends StatelessWidget {
                             : Colors.transparent,
                   ),
                 );
-              }),
+              }, growable: true,),
             ],
           ),
         );

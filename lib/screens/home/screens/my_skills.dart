@@ -80,6 +80,7 @@ class MySkills extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: AppDimens.wSize(32)),
                 child: GridView.builder(
                   itemCount: skillsNdTools.length,
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: AppDimens.wSize(186),
@@ -188,6 +189,7 @@ class MySkills extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: AppDimens.wSize(32)),
                 child: GridView.builder(
                   itemCount: skillsNdTools.length,
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: AppDimens.wSize(161),

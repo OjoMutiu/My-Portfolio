@@ -50,7 +50,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
     ContactMe(),
   ];
 
-  final sectionKeys = List.generate(8, (_) => GlobalKey());
+  final sectionKeys = List.generate(7, (_) => GlobalKey());
 
   void scrollToIndex(int index) {
     final context = sectionKeys[index].currentContext;
@@ -301,6 +301,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
               child: ListView.builder(
                 itemCount: sections.length,
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (_, index) {
                   return FadeSlideInOnVisible(
                     key: sectionKeys[index],
