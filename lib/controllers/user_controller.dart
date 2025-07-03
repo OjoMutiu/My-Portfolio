@@ -12,12 +12,12 @@ class UserController extends GetxController {
   TextEditingController userWebAddressController = TextEditingController();
   TextEditingController userHowCanIController = TextEditingController();
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   //get portfolio projects
   Future<void> getPortfolioProjects() async {
     print("here in get portfolio");
-    var projects = firestore.collection("projects");
+    var projects = fireStore.collection("projects");
     try {
       QuerySnapshot snapshot = await projects.get();
 
@@ -43,7 +43,7 @@ class UserController extends GetxController {
   bool isUserLoaded = false;
 
   Future<void> getPortfolioUser() async {
-    var users = firestore.collection("user");
+    var users = fireStore.collection("user");
     try {
       DocumentSnapshot snapshot = await users.doc("user").get();
 
