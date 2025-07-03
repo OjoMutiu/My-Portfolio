@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:portfolio/controllers/user_controller.dart';
 import 'package:portfolio/screens/home/screens/about_me.dart';
 import 'package:portfolio/screens/home/screens/contact_me.dart';
 import 'package:portfolio/screens/home/screens/experience.dart';
@@ -23,6 +25,8 @@ class MobileHomePage extends StatefulWidget {
 
 class _MobileHomePageState extends State<MobileHomePage> {
   ScrollController scrollController = ScrollController();
+
+  UserController userController = Get.find<UserController>();
 
   @override
   void initState() {
@@ -111,7 +115,40 @@ class _MobileHomePageState extends State<MobileHomePage> {
       {
         "title": "Resume",
         "icon": Icons.save_alt,
-        "onTap": () {
+        "onTap": () async{
+          Get.back();
+          if (userController.isUserLoaded && !userController.isDownloadingResume) {
+            var result = await userController.launchResumeUrl();
+
+            if (result.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: AppColors.blackColor,
+                  content: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.error_outline, color: AppColors.white,),
+                          AppTextSora(
+                            text: "  Error",
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      AppTextSora(
+                        text: result,
+                        fontSize: AppDimens.fSize(12),
+                        color: AppColors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+          }
         },
       },
     ];
