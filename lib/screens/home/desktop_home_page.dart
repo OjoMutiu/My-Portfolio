@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:portfolio/constants/app_colors.dart';
+import 'package:portfolio/controllers/user_controller.dart';
 import 'package:portfolio/screens/home/screens/about_me.dart';
 import 'package:portfolio/screens/home/screens/contact_me.dart';
 import 'package:portfolio/screens/home/screens/experience.dart';
@@ -33,7 +35,6 @@ class _DesktopHomePageState extends State<DesktopHomePage>
   }
 
   List<Widget> sections = [
-
     ///My Skills
     MySkills(),
 
@@ -70,143 +71,234 @@ class _DesktopHomePageState extends State<DesktopHomePage>
   Widget build(BuildContext context) {
     double screeWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        actionsPadding: EdgeInsets.zero,
-        automaticallyImplyLeading: false,
-        titleSpacing: 0,
-        toolbarHeight: AppDimens.hSize(104),
+    return GetBuilder(
+      builder: (UserController userController) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: false,
+            actionsPadding: EdgeInsets.zero,
+            automaticallyImplyLeading: false,
+            titleSpacing: 0,
+            toolbarHeight: AppDimens.hSize(104),
 
-        title: Container(
-          //color: Colors.blue,
-          padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.wSize(80),
-            vertical: 24,
-          ),
+            title: Container(
+              //color: Colors.blue,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimens.wSize(80),
+                vertical: 24,
+              ),
 
-          child: Row(
-            children: [
-              SvgPicture.asset(AppIcons.logo),
-              SizedBox(width: AppDimens.wSize(12)),
-              Row(
+              child: Row(
                 children: [
-                  AppTextSora(
-                    text: "</",
-                    fontWeight: FontWeight.w800,
-                    fontSize: AppDimens.fSize(18),
-                  ),
-                  AppTextSora(text: "Source", fontWeight: FontWeight.w700),
+                  SvgPicture.asset(AppIcons.logo),
+                  SizedBox(width: AppDimens.wSize(12)),
+                  Row(
+                    children: [
+                      AppTextSora(
+                        text: "</",
+                        fontWeight: FontWeight.w800,
+                        fontSize: AppDimens.fSize(18),
+                      ),
+                      AppTextSora(text: "Source", fontWeight: FontWeight.w700),
 
-                  AppTextSora(text: "Code", fontWeight: FontWeight.w700),
-                  AppTextSora(
-                    text: "/>",
-                    fontWeight: FontWeight.w800,
-                    fontSize: AppDimens.fSize(18),
+                      AppTextSora(text: "Code", fontWeight: FontWeight.w700),
+                      AppTextSora(
+                        text: "/>",
+                        fontWeight: FontWeight.w800,
+                        fontSize: AppDimens.fSize(18),
+                      ),
+                    ],
                   ),
+                  const Spacer(flex: 3),
+                  Expanded(
+                    flex: 6,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            scrollToIndex(2);
+                          },
+                          child: AppTextSora(
+                            text: "About Me",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            scrollToIndex(0);
+                          },
+                          child: AppTextSora(
+                            text: "Skills",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            scrollToIndex(3);
+                          },
+                          child: AppTextSora(
+                            text: "Project",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            scrollToIndex(5);
+                          },
+                          child: AppTextSora(
+                            text: "Contact Me",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(flex: 2),
+                  screeWidth <= 1024
+                      ? GestureDetector(
+                        onTap: () async {
+                          if (userController.isUserLoaded && !userController.isDownloadingResume) {
+                            var result = await userController.launchResumeUrl();
+
+                            if (result.isNotEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: AppColors.blackColor,
+                                  content: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.error_outline, color: AppColors.white,),
+                                          AppTextSora(
+                                            text: "  Error",
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.white,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 6),
+                                      AppTextSora(
+                                        text: result,
+                                        fontSize: AppDimens.fSize(12),
+                                        color: AppColors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        child: Container(
+                          width: AppDimens.wSize(60),
+                          height: AppDimens.hSize(50),
+                          padding: EdgeInsets.symmetric(
+                            vertical: AppDimens.hSize(10),
+                            horizontal: AppDimens.wSize(6),
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.blackColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child:
+                              (userController.isUserLoaded || !userController.isDownloadingResume)
+                                  ? SvgPicture.asset(AppIcons.downloadIcon)
+                                  : Center(
+                                    child: SizedBox(
+                                      width: AppDimens.wSize(25),
+                                      height: AppDimens.hSize(20),
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.white,
+                                        strokeWidth: 2,
+                                      ),
+                                    ),
+                                  ),
+                        ),
+                      )
+                      : CustomActionButton(
+                        btnText: 'Resume',
+                        inActive: (!userController.isUserLoaded || userController.isDownloadingResume),
+                        width: AppDimens.wSize(150),
+                        height: AppDimens.hSize(60),
+                        icon: AppIcons.downloadIcon,
+                        onPressed: () async{
+                            if (userController.isUserLoaded) {
+                              if(!userController.isDownloadingResume){
+                                var result = await userController.launchResumeUrl();
+
+                                if (result.isNotEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: AppColors.blackColor,
+                                      content: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.error_outline, color: AppColors.white,),
+                                              AppTextSora(
+                                                text: "  Error",
+                                                fontWeight: FontWeight.w500,
+                                                color: AppColors.white,
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 6),
+                                          AppTextSora(
+                                            text: result,
+                                            fontSize: AppDimens.fSize(12),
+                                            color: AppColors.white,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }
+                            }
+                        },
+                      ),
                 ],
               ),
-              const Spacer(flex: 3),
-              Expanded(
-                flex: 6,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        scrollToIndex(2);
-                      },
-                      child: AppTextSora(
-                        text: "About Me",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        scrollToIndex(0);
-                      },
-                      child: AppTextSora(
-                        text: "Skills",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        scrollToIndex(3);
-                      },
-                      child: AppTextSora(
-                        text: "Project",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        scrollToIndex(5);
-                      },
-                      child: AppTextSora(
-                        text: "Contact Me",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(flex: 2),
-              screeWidth <= 1024
-                  ? Container(
-                    width: AppDimens.wSize(60),
-                    height: AppDimens.hSize(50),
-                    padding: EdgeInsets.symmetric(vertical: AppDimens.hSize(10), horizontal: AppDimens.wSize(6)),
-                    decoration: BoxDecoration(
-                      color: AppColors.blackColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: SvgPicture.asset(AppIcons.downloadIcon),
-                  )
-                  : CustomActionButton(
-                    btnText: 'Resume',
-                    width: AppDimens.wSize(150),
-                    height: AppDimens.hSize(60),
-                    icon: AppIcons.downloadIcon,
-                    onPressed: () {},
-                  ),
-            ],
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          children: [
-            ///Hero Section
-            HeroSection(),
-            MediaQuery.removePadding(
-              context: context,
-              removeTop: true,
-              removeBottom: true,
-              child: ListView.builder(
-                itemCount: sections.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (_, index) {
-                  return FadeSlideInOnVisible(
-                    key: sectionKeys[index],
-                    delayMilliseconds: index * 100,
-                    child: sections[index],
-                  );
-                },
-              ),
             ),
+          ),
+          body: SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              children: [
+                ///Hero Section
+                HeroSection(),
+                MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  removeBottom: true,
+                  child: ListView.builder(
+                    itemCount: sections.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (_, index) {
+                      return FadeSlideInOnVisible(
+                        key: sectionKeys[index],
+                        delayMilliseconds: index * 100,
+                        child: sections[index],
+                      );
+                    },
+                  ),
+                ),
 
-            ///Footer
-            Footer(),
-          ],
-        ),
-      ),
+                ///Footer
+                Footer(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -218,7 +310,7 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.wSize(AppDimens.isDesktop ? 80:16),
+        horizontal: AppDimens.wSize(AppDimens.isDesktop ? 80 : 16),
         vertical: AppDimens.hSize(24),
       ),
       color: AppColors.blackColor,
@@ -228,7 +320,7 @@ class Footer extends StatelessWidget {
             AppIcons.logo,
             colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
           ),
-          SizedBox(width: AppDimens.wSize(AppDimens.isDesktop ? 12:4)),
+          SizedBox(width: AppDimens.wSize(AppDimens.isDesktop ? 12 : 4)),
           Row(
             children: [
               AppTextSora(
@@ -317,10 +409,7 @@ class _FadeSlideInOnVisibleState extends State<FadeSlideInOnVisible>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
+    _controller = AnimationController(vsync: this, duration: widget.duration);
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.1),
@@ -363,13 +452,11 @@ class _FadeSlideInOnVisibleState extends State<FadeSlideInOnVisible>
       },
       child: AnimatedBuilder(
         animation: _controller,
-        builder: (_, child) => FadeTransition(
-          opacity: _fadeAnimation,
-          child: SlideTransition(
-            position: _slideAnimation,
-            child: child,
-          ),
-        ),
+        builder:
+            (_, child) => FadeTransition(
+              opacity: _fadeAnimation,
+              child: SlideTransition(position: _slideAnimation, child: child),
+            ),
         child: widget.child,
       ),
     );
@@ -381,7 +468,6 @@ class _FadeSlideInOnVisibleState extends State<FadeSlideInOnVisible>
     super.dispose();
   }
 }
-
 
 //
 // @override

@@ -9,4 +9,5 @@ Future<void> initDep() async {
 getAllMethods(){
   Get.find<UserController>();
   Get.find<UserController>().getPortfolioProjects();
+  Get.find<UserController>().getPortfolioUser();
 }
