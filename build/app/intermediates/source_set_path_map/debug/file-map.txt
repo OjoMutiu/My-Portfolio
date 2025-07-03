@@ -1,0 +1,36 @@
+com.example.portfolio.app-jetified-startup-runtime-1.1.1-0 C:\Users\USER\.gradle\caches\transforms-3\02593574b5fba68029fce4e89a5d8b51\transformed\jetified-startup-runtime-1.1.1\res
+com.example.portfolio.app-jetified-savedstate-1.2.1-1 C:\Users\USER\.gradle\caches\transforms-3\07b8e7a4fad579dacc413b32be7bbc8a\transformed\jetified-savedstate-1.2.1\res
+com.example.portfolio.app-jetified-window-java-1.2.0-2 C:\Users\USER\.gradle\caches\transforms-3\238364b14f0b1ee4e16dcf68b46ad37b\transformed\jetified-window-java-1.2.0\res
+com.example.portfolio.app-jetified-play-services-basement-18.3.0-3 C:\Users\USER\.gradle\caches\transforms-3\2ea1f7964673fb63a907cea483195339\transformed\jetified-play-services-basement-18.3.0\res
+com.example.portfolio.app-jetified-annotation-experimental-1.4.0-4 C:\Users\USER\.gradle\caches\transforms-3\384af5e9e0c4abccb617ceb24f146af9\transformed\jetified-annotation-experimental-1.4.0\res
+com.example.portfolio.app-lifecycle-runtime-2.7.0-5 C:\Users\USER\.gradle\caches\transforms-3\3f45f973e0c518466b8b573c1814b4b5\transformed\lifecycle-runtime-2.7.0\res
+com.example.portfolio.app-jetified-profileinstaller-1.3.1-6 C:\Users\USER\.gradle\caches\transforms-3\4ff5dd72a9f89b3fe80f2b50f140f3fd\transformed\jetified-profileinstaller-1.3.1\res
+com.example.portfolio.app-jetified-play-services-base-18.1.0-7 C:\Users\USER\.gradle\caches\transforms-3\52171ec3a7a9e3493f001109cfd11dd0\transformed\jetified-play-services-base-18.1.0\res
+com.example.portfolio.app-core-runtime-2.2.0-8 C:\Users\USER\.gradle\caches\transforms-3\54f2e79408f172d31f8b8f0c5c8eedff\transformed\core-runtime-2.2.0\res
+com.example.portfolio.app-jetified-tracing-1.2.0-9 C:\Users\USER\.gradle\caches\transforms-3\56c5133c1b397a5122bc9cc3d301055f\transformed\jetified-tracing-1.2.0\res
+com.example.portfolio.app-core-1.13.1-10 C:\Users\USER\.gradle\caches\transforms-3\654d63221ce57f6051730dc1513a5ed1\transformed\core-1.13.1\res
+com.example.portfolio.app-fragment-1.7.1-11 C:\Users\USER\.gradle\caches\transforms-3\777a749eb340629e12461e43e25ffacd\transformed\fragment-1.7.1\res
+com.example.portfolio.app-lifecycle-livedata-core-2.7.0-12 C:\Users\USER\.gradle\caches\transforms-3\789df93f8653a26f082a537c5f8b819f\transformed\lifecycle-livedata-core-2.7.0\res
+com.example.portfolio.app-browser-1.8.0-13 C:\Users\USER\.gradle\caches\transforms-3\815ecf8945f6b8bc9f476874961e2dab\transformed\browser-1.8.0\res
+com.example.portfolio.app-jetified-window-1.2.0-14 C:\Users\USER\.gradle\caches\transforms-3\89e74b2db4e1198dbca3b32aabad548a\transformed\jetified-window-1.2.0\res
+com.example.portfolio.app-jetified-activity-1.8.1-15 C:\Users\USER\.gradle\caches\transforms-3\8acdae010146edbea93d76407cfd2748\transformed\jetified-activity-1.8.1\res
+com.example.portfolio.app-lifecycle-viewmodel-2.7.0-16 C:\Users\USER\.gradle\caches\transforms-3\96280f2fec81171226b895c99b2bd933\transformed\lifecycle-viewmodel-2.7.0\res
+com.example.portfolio.app-jetified-lifecycle-livedata-core-ktx-2.7.0-17 C:\Users\USER\.gradle\caches\transforms-3\ad2207ae7cb909693c507893aff3751c\transformed\jetified-lifecycle-livedata-core-ktx-2.7.0\res
+com.example.portfolio.app-jetified-core-1.0.0-18 C:\Users\USER\.gradle\caches\transforms-3\b3c652de4ac9d4aa891f977a88d4e530\transformed\jetified-core-1.0.0\res
+com.example.portfolio.app-jetified-core-ktx-1.13.1-19 C:\Users\USER\.gradle\caches\transforms-3\c5a971b381e60c7b80237a0ab71e30bf\transformed\jetified-core-ktx-1.13.1\res
+com.example.portfolio.app-lifecycle-livedata-2.7.0-20 C:\Users\USER\.gradle\caches\transforms-3\caecf1c47e3e3e172007dd1dba664333\transformed\lifecycle-livedata-2.7.0\res
+com.example.portfolio.app-jetified-lifecycle-viewmodel-savedstate-2.7.0-21 C:\Users\USER\.gradle\caches\transforms-3\ea3efa675d06fa9cd8dd31f907153916\transformed\jetified-lifecycle-viewmodel-savedstate-2.7.0\res
+com.example.portfolio.app-jetified-lifecycle-process-2.7.0-22 C:\Users\USER\.gradle\caches\transforms-3\ef8bede83eb018a8d237f8d4b2f623cf\transformed\jetified-lifecycle-process-2.7.0\res
+com.example.portfolio.app-jetified-firebase-common-21.0.0-23 C:\Users\USER\.gradle\caches\transforms-3\f8e140bf0120ddef87649a2363af5e68\transformed\jetified-firebase-common-21.0.0\res
+com.example.portfolio.app-debug-24 C:\Users\USER\Flutter Projects\work\My-Portfolio\android\app\src\debug\res
+com.example.portfolio.app-main-25 C:\Users\USER\Flutter Projects\work\My-Portfolio\android\app\src\main\res
+com.example.portfolio.app-google-services-26 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\app\generated\res\google-services\debug
+com.example.portfolio.app-pngs-27 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\app\generated\res\pngs\debug
+com.example.portfolio.app-resValues-28 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\app\generated\res\resValues\debug
+com.example.portfolio.app-packageDebugResources-29 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\app\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.portfolio.app-packageDebugResources-30 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\app\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.portfolio.app-merged_res-31 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\app\intermediates\merged_res\debug
+com.example.portfolio.app-packaged_res-32 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\cloud_firestore\intermediates\packaged_res\debug
+com.example.portfolio.app-packaged_res-33 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\firebase_core\intermediates\packaged_res\debug
+com.example.portfolio.app-packaged_res-34 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\path_provider_android\intermediates\packaged_res\debug
+com.example.portfolio.app-packaged_res-35 C:\Users\USER\Flutter Projects\work\My-Portfolio\build\url_launcher_android\intermediates\packaged_res\debug
