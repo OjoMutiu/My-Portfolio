@@ -23,6 +23,12 @@ class CustomTxtField extends StatelessWidget {
                 color: AppColors.blackColor,
                 width: 2,
               )
+          ), focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                color: AppColors.blackColor,
+                width: 2,
+              )
           ),
           contentPadding: EdgeInsets.only(
             left: AppDimens.wSize(12),

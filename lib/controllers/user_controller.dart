@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/constants/app_colors.dart';
 import 'package:portfolio/models/user_Model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,7 +33,7 @@ class UserController extends GetxController {
               .toList();
 
       print("Fetched ${data.length} project(s)");
-      print("Data is $data");
+      //print("Data is $data");
     } catch (e) {
       debugPrint("error is ${e.toString()}");
     }
@@ -62,6 +63,7 @@ class UserController extends GetxController {
 
   // download resume
   bool isDownloadingResume = false;
+
   Future<String> launchResumeUrl() async {
     isDownloadingResume = true;
     update();
@@ -71,7 +73,7 @@ class UserController extends GetxController {
         isDownloadingResume = false;
         update();
         return "Unable to download resume, try again with stable network";
-      }else{
+      } else {
         isDownloadingResume = false;
         update();
         return "";
@@ -81,6 +83,53 @@ class UserController extends GetxController {
       update();
       return "Unable to download resume, try again with stable network";
     }
+  }
 
+  // contact vai mail
+  bool isSendingMail = false;
+  Future<String> sendMail() async {
+    isSendingMail = true;
+    update();
+    if (userHowCanIController.text.isNotEmpty) {
+      if ((user.id ?? "").toString().isNotEmpty) {
+        var message =
+            "Name: ${userNameController.text}\nEmail: ${userEmailController.text}\nWebsite: ${userWebAddressController.text}\n Message:${userHowCanIController.text}";
+
+        final Uri emailUri = Uri(
+          scheme: 'mailto',
+          path: user.email ?? "sourcecode.wildtech@gmail.com", // change to your email
+          query: Uri.encodeFull('subject=How You Can Help Me&body=$message'),
+        );
+
+        if (!await launchUrl(emailUri, mode: LaunchMode.externalApplication)) {
+          isSendingMail = false;
+          update();
+          return "Unable to contact Ojo, try again with stable network";
+        } else {
+          isSendingMail = false;
+          userHowCanIController.clear();
+          userWebAddressController.clear();
+          userNameController.clear();
+          userEmailController.clear();
+          update();
+          return "";
+        }
+      } else {
+        isSendingMail = false;
+        update();
+        return "Unable to contact Ojo, try again with stable network";
+      }
+    } else {
+      Get.snackbar(
+        "Error",
+        "One or two required fields are empty",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.blackColor,
+        colorText: AppColors.white,
+      );
+      isSendingMail = false;
+      update();
+      return "";
+    }
   }
 }

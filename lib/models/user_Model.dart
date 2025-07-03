@@ -1,13 +1,17 @@
 class UserModel {
   int? id;
   String? name;
+  String? email;
   String? resumeUrl;
+  // String? linkedlnUrl;
+  // String? resumeUrl;
   String? role;
 
   UserModel(
       {
         this.id,
         this.name,
+        this.email,
         this.resumeUrl,
         this.role,
       });
@@ -20,6 +24,8 @@ class UserModel {
     }
     if (json["name"] is String) {
       name = json["name"];
+    }if (json["email"] is String) {
+      email = json["email"];
     }
     if (json["role"] is String) {
       role = json["role"];
@@ -31,6 +37,7 @@ class UserModel {
     data["id"] = id;
     data["resumeUrl"] = resumeUrl;
     data["name"] = name;
+    data["email"] = email;
     data["role"] = role;
     return data;
   }

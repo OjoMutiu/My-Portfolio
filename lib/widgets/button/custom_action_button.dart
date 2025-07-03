@@ -19,7 +19,7 @@ class CustomActionButton extends StatelessWidget {
         this.textIconSpace,
         this.paddingRight,
         this.paddingLeft,
-        this.spaceBtw, this.height});
+        this.spaceBtw, this.height, this.isLoading});
   final String btnText;
    final void Function()? onPressed;
   final String? icon;
@@ -28,7 +28,7 @@ class CustomActionButton extends StatelessWidget {
   final double? paddingRight;
   final double? paddingLeft;
   final double? textIconSpace;
-  final bool? inActive;
+  final bool? inActive, isLoading;
   final double? width, height;
   final Color? bgColor;
   final Color? textColor;
@@ -49,7 +49,11 @@ class CustomActionButton extends StatelessWidget {
                 (inActive == true ? Colors.blueGrey : AppColors.blackColor),
             borderRadius: BorderRadius.circular(4)),
         child: Center(
-          child: Row(
+          child: (isLoading?? false) ? SizedBox(
+            height: AppDimens.hSize(20),
+            width: AppDimens.wSize(20),
+            child: CircularProgressIndicator(color: AppColors.white, strokeWidth: 2,),
+          ):Row(
             mainAxisAlignment: spaceBtw == true
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.center,

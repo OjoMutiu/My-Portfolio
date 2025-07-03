@@ -227,6 +227,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                         width: AppDimens.wSize(150),
                         height: AppDimens.hSize(60),
                         icon: AppIcons.downloadIcon,
+                        isLoading: userController.isDownloadingResume,
                         onPressed: () async{
                             if (userController.isUserLoaded) {
                               if(!userController.isDownloadingResume){

@@ -79,12 +79,12 @@ class ContactMe extends StatelessWidget {
                           children: [
                             CustomTxtField(
                               controller: userController.userNameController,
-                              hintText: "Your name",
+                              hintText: "Your name*",
                             ),
                             SizedBox(height: AppDimens.hSize(20)),
                             CustomTxtField(
                               controller: userController.userEmailController,
-                              hintText: "Email",
+                              hintText: "Email*",
                             ),
                             SizedBox(height: AppDimens.hSize(20)),
                             CustomTxtField(
@@ -95,7 +95,7 @@ class ContactMe extends StatelessWidget {
                             SizedBox(height: AppDimens.hSize(20)),
                             CustomTxtField(
                               controller: userController.userHowCanIController,
-                              hintText: "Let's discuss how we can create magic",
+                              hintText: "Let's discuss how we can create magic*",
                               maxLines: 5,
                             ),
                             SizedBox(height: AppDimens.hSize(30)),
@@ -106,7 +106,41 @@ class ContactMe extends StatelessWidget {
                                   btnText: 'Get In Touch',
                                   width: AppDimens.wSize(150),
                                   height: AppDimens.hSize(60),
-                                  onPressed: () {},
+                                  isLoading: userController.isSendingMail,
+                                  onPressed: () async{
+                                    if (userController.isUserLoaded && !userController.isSendingMail) {
+                                      var result = await userController.sendMail();
+
+                                      if (result.isNotEmpty) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            backgroundColor: AppColors.blackColor,
+                                            content: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(Icons.error_outline, color: AppColors.white,),
+                                                    AppTextSora(
+                                                      text: "  Error",
+                                                      fontWeight: FontWeight.w500,
+                                                      color: AppColors.white,
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 6),
+                                                AppTextSora(
+                                                  text: result,
+                                                  fontSize: AppDimens.fSize(12),
+                                                  color: AppColors.white,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
                                 ),
                                 const Spacer(),
                                 ...List.generate(socials.length, (index) {
@@ -270,12 +304,12 @@ class ContactMe extends StatelessWidget {
                     children: [
                       CustomTxtField(
                         controller: userController.userNameController,
-                        hintText: "Your name",
+                        hintText: "Your name*",
                       ),
                       SizedBox(height: AppDimens.hSize(20)),
                       CustomTxtField(
                         controller: userController.userEmailController,
-                        hintText: "Email",
+                        hintText: "Email*",
                       ),
                       SizedBox(height: AppDimens.hSize(20)),
                       CustomTxtField(
@@ -286,7 +320,7 @@ class ContactMe extends StatelessWidget {
                       SizedBox(height: AppDimens.hSize(20)),
                       CustomTxtField(
                         controller: userController.userHowCanIController,
-                        hintText: "Let's discuss how we can create magic",
+                        hintText: "Let's discuss how we can create magic*",
                         maxLines: 5,
                       ),
                       SizedBox(height: AppDimens.hSize(30)),
@@ -294,7 +328,41 @@ class ContactMe extends StatelessWidget {
                         btnText: 'Get In Touch',
                         width: AppDimens.wSize(150),
                         height: AppDimens.hSize(60),
-                        onPressed: () {},
+                        isLoading: userController.isSendingMail,
+                        onPressed: () async{
+                          if (userController.isUserLoaded && !userController.isSendingMail) {
+                            var result = await userController.sendMail();
+
+                            if (result.isNotEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: AppColors.blackColor,
+                                  content: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.error_outline, color: AppColors.white,),
+                                          AppTextSora(
+                                            text: "  Error",
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.white,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 6),
+                                      AppTextSora(
+                                        text: result,
+                                        fontSize: AppDimens.fSize(12),
+                                        color: AppColors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          }
+                        },
                       ),
                       SizedBox(height: AppDimens.hSize(30)),
                       Row(
