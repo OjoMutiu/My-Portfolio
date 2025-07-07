@@ -9,9 +9,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 class UserController extends GetxController {
   TextEditingController userNameController = TextEditingController();
+  FocusNode userNameFocusNode = FocusNode();
   TextEditingController userEmailController = TextEditingController();
+  FocusNode userEmailFocusNode = FocusNode();
   TextEditingController userWebAddressController = TextEditingController();
+  FocusNode userWebAddressFocusNode = FocusNode();
   TextEditingController userHowCanIController = TextEditingController();
+  FocusNode userHowCanFocusNode = FocusNode();
 
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
 

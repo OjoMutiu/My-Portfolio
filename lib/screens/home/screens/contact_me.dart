@@ -79,22 +79,26 @@ class ContactMe extends StatelessWidget {
                           children: [
                             CustomTxtField(
                               controller: userController.userNameController,
+                              focusNode: userController.userNameFocusNode,
                               hintText: "Your name*",
                             ),
                             SizedBox(height: AppDimens.hSize(20)),
                             CustomTxtField(
                               controller: userController.userEmailController,
+                              focusNode: userController.userEmailFocusNode,
                               hintText: "Email*",
                             ),
                             SizedBox(height: AppDimens.hSize(20)),
                             CustomTxtField(
                               controller:
                                   userController.userWebAddressController,
+                              focusNode: userController.userWebAddressFocusNode,
                               hintText: "Your website (if any)",
                             ),
                             SizedBox(height: AppDimens.hSize(20)),
                             CustomTxtField(
                               controller: userController.userHowCanIController,
+                              focusNode: userController.userHowCanFocusNode,
                               hintText: "Let's discuss how we can create magic*",
                               maxLines: 5,
                             ),
@@ -304,22 +308,26 @@ class ContactMe extends StatelessWidget {
                     children: [
                       CustomTxtField(
                         controller: userController.userNameController,
+                        focusNode: userController.userNameFocusNode,
                         hintText: "Your name*",
                       ),
                       SizedBox(height: AppDimens.hSize(20)),
                       CustomTxtField(
                         controller: userController.userEmailController,
+                        focusNode: userController.userEmailFocusNode,
                         hintText: "Email*",
                       ),
                       SizedBox(height: AppDimens.hSize(20)),
                       CustomTxtField(
                         controller:
                             userController.userWebAddressController,
+                        focusNode: userController.userWebAddressFocusNode,
                         hintText: "Your website (if any)",
                       ),
                       SizedBox(height: AppDimens.hSize(20)),
                       CustomTxtField(
                         controller: userController.userHowCanIController,
+                        focusNode: userController.userHowCanFocusNode,
                         hintText: "Let's discuss how we can create magic*",
                         maxLines: 5,
                       ),

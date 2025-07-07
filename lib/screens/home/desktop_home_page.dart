@@ -34,24 +34,24 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     scrollController.addListener(() {});
   }
 
-  List<Widget> sections = [
+  List<Map<String,dynamic>> sections = [
     ///My Skills
-    MySkills(),
+    { "name" : "MySkills", "Widget" : MySkills(),},
 
     ///Experience
-    Experience(),
+    {"name" : "MyExperience", "Widget" : Experience(),},
 
     ///About Me
-    AboutMe(),
+    {"name" : "AboutMe", "Widget" : AboutMe(),},
 
     ///Portfolio
-    Portfolios(),
+    {"name" : "MyProjects", "Widget" : Portfolios(),},
 
     ///Testimonials
-    Testimonial(),
+    {"name" : "MyTestimonial", "Widget" : Testimonial(),},
 
     ///Contact Me
-    ContactMe(),
+    {"name" : "ContactMe", "Widget" : ContactMe(),},
   ];
 
   final sectionKeys = List.generate(7, (_) => GlobalKey());
@@ -286,8 +286,10 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                     itemBuilder: (_, index) {
                       return FadeSlideInOnVisible(
                         key: sectionKeys[index],
+                        sectionName: sections[index]['name'],
                         delayMilliseconds: index * 100,
-                        child: sections[index],
+                        child: sections[index]["Widget"],
+
                       );
                     },
                   ),
@@ -385,13 +387,14 @@ class FadeSlideInOnVisible extends StatefulWidget {
   final Duration duration;
   final Curve curve;
   final int delayMilliseconds;
+  final String sectionName;
 
   const FadeSlideInOnVisible({
     super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 400),
     this.curve = Curves.easeOut,
-    this.delayMilliseconds = 0,
+    this.delayMilliseconds = 0, required this.sectionName,
   });
 
   @override
@@ -434,7 +437,7 @@ class _FadeSlideInOnVisibleState extends State<FadeSlideInOnVisible>
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      key: UniqueKey(),
+      key: ValueKey(widget.sectionName),//UniqueKey(),
       onVisibilityChanged: (info) {
         if (info.visibleFraction > 0.1) {
           if (!_isInView) {
