@@ -95,7 +95,7 @@ class Portfolios extends StatelessWidget {
                 return ProjectCard(
                   title: project["title"],
                   description:
-                      "I'm Evren Shah Lorem Ipsum is "
+                      "I'm Mutiu Ojo Lorem Ipsum is "
                       "simply dummy text of the printing and typesetting "
                       "industry. Lorem Ipsum has been the industry's "
                       "standard dummy text ever since the 1500s, when an "
@@ -158,7 +158,7 @@ class Portfolios extends StatelessWidget {
                 return ProjectCard(
                   title: project["title"],
                   description:
-                      "I'm Evren Shah Lorem Ipsum is "
+                      "I'm Mutiu Ojo Lorem Ipsum is "
                       "simply dummy text of the printing and typesetting "
                       "industry. Lorem Ipsum has been the industry's "
                       "standard dummy text ever since the 1500s, when an "
